@@ -1,0 +1,122 @@
+canvas=new fabric.Canvas("myCanvas");
+player_x=50;
+player_y=50;
+block_height=30;
+block_width=30;
+player_object="";
+block_object="";
+playerDraw();
+function playerDraw(){
+    fabric.Image.fromURL("player.png",function(img){
+        player_object=img;
+        player_object.scaleToWidth(150);
+        player_object.scaleToHeight(100);
+        player_object.set({
+            top:player_y,
+            left:player_x
+        }
+        );
+        canvas.add(player_object);
+    })
+}
+function blockDraw(block){
+    fabric.Image.fromURL(block,function(img){
+        block_object=img;
+        block_object.scaleToWidth(block_width);
+        block_object.scaleToHeight(block_height);
+        block_object.set({
+            top:player_y,
+            left:player_x
+        }
+        );
+        canvas.add(block_object);
+    })
+}
+window.addEventListener("keydown",my_keydown);
+function my_keydown(e){
+    console.log(e.keyCode);
+    if(e.keyCode=="67"){
+blockDraw("cloud.jpg");
+    }
+    if(e.keyCode=="68"){
+        blockDraw("dark_green.png");
+            }
+    if(e.keyCode=="89"){
+                blockDraw("yellow_wall.png");
+                    }
+    if(e.keyCode=="76"){
+                blockDraw("light_green.png");                                                                                                                                                             
+    }
+    if(e.keyCode=="71"){
+        blockDraw("ground.png");
+            }
+            if(e.keyCode=="82"){
+                blockDraw("roof.jpg");                                                                                                                                                             
+    }       
+    if(e.keyCode=="84"){
+        blockDraw("trunk.jpg");                                                                                                                                                             
+} 
+if(e.keyCode=="85"){
+    blockDraw("unique.png");                                                                                                                                                             
+}
+if(e.keyCode=="87"){
+    blockDraw("wall.jpg");
+}
+
+    if(e.shiftKey==true && e.keyCode=="80"){
+        block_height=block_height+10;
+        block_width=block_width+10;  
+        document.getElementById("Height").innerHTML=block_height; 
+        document.getElementById("width").innerHTML=block_width;
+    }
+        if(e.shiftKey==true && e.keyCode=="77"){
+            block_height=block_height-10;
+            block_width=block_width-10;  
+            document.getElementById("Height").innerHTML=block_height; 
+            document.getElementById("width").innerHTML=block_width;                                                                                                                                        
+}
+if(e.keyCode=="38"){
+    Up()
+    console.log("up")
+}
+if(e.keyCode=="40"){
+    Down();
+    console.log("down");
+}
+if(e.keyCode=="37"){
+    Left()
+    console.log("Left");
+}
+if(e.keyCode=="39"){
+    Right()
+    console.log("Right")
+}
+}
+function Up(){
+    if(player_y>=10){
+        player_y=player_y-block_height
+        canvas.remove(player_object);
+        playerDraw();
+    }
+}
+function Down(){
+    if(player_y<=700){
+        player_y=player_y+block_height
+        canvas.remove(player_object);
+        playerDraw();
+    }
+}
+function Left(){
+    if(player_x>=10){
+        player_x=player_x-block_height
+        canvas.remove(player_object);
+        playerDraw();
+    }
+}
+function Right(){
+    if(player_x<=900){
+        player_x=player_x+block_height
+        canvas.remove(player_object);
+        playerDraw();
+    }
+}
